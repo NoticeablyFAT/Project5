@@ -29,7 +29,9 @@ public class MesoFileReader {
 
 	}
 	
-	
+	public ArrayList<String> getStations(){		//Returns arraylist with list of stations
+		return stations;
+	}
 	
 	
 
