@@ -1,10 +1,15 @@
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -65,11 +70,33 @@ public class MesoGUI extends Application {
 	         }
 	      });
 		
+
+		//text box
+		TextArea box =  new TextArea();
+		box.setPrefColumnCount(10);
 		
-		//button
+		
+		
+		
+		
+		
+		//show station button
 		Button showStation = new Button("Show Station");
 		
 		
+		EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() { 
+            public void handle(ActionEvent e) 
+            { 
+            	ArrayList<String> temp = new MesoCal().findHammStations((int)hammSlider.getValue(), "NRMN");
+            	String tempString = "";
+            	for(int i = 0; i < temp.size(); ++i) {
+            		tempString += temp.get(i) + "\n";
+            	}
+                box.setText(tempString); 
+            } 
+        }; 
+        
+        showStation.setOnAction(event);
 		
 		
 		
@@ -77,16 +104,12 @@ public class MesoGUI extends Application {
 		
 		
 		
-		//text box
 		
 		
 		
 		
 		
-		
-		
-		
-		//wheel
+		//spinner
 		
 		
 		
@@ -104,6 +127,7 @@ public class MesoGUI extends Application {
 		gridPane.add(sliderLabel, 0, 0);
 		gridPane.add(hammSlider, 0, 1);
 		gridPane.add(showStation, 0, 2);
+		gridPane.add(box, 0, 3);
 		gridPane.add(enterHamm2, 20, 20);
 		
 		
