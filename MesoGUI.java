@@ -26,7 +26,7 @@ public class MesoGUI extends Application {
 		
 		
 		//labels and text
-		Label sliderLabel = new Label("1");
+		Label sliderLabel = new Label("Enter Hamming Dist: 1");
 		TextField enterHamm2 = new TextField();
 		
 		Label enterHamm = new Label();
@@ -61,7 +61,7 @@ public class MesoGUI extends Application {
 	         public void changed(ObservableValue<? extends Number> observable, //
 	               Number oldValue, Number newValue) {
 	 
-	        	 sliderLabel.setText(Integer.toString((int)hammSlider.getValue()));
+	        	 sliderLabel.setText("Enter Hamming Dist: " + Integer.toString((int)hammSlider.getValue()));
 	         }
 	      });
 		
@@ -77,6 +77,22 @@ public class MesoGUI extends Application {
 		
 		
 		
+		//text box
+		
+		
+		
+		
+		
+		
+		
+		
+		//wheel
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -84,8 +100,8 @@ public class MesoGUI extends Application {
 
 		
 		//pane setup
-		gridPane.add(enterHamm, 0, 0);
-		gridPane.add(sliderLabel, 1, 0);
+		//gridPane.add(enterHamm, 0, 0);
+		gridPane.add(sliderLabel, 0, 0);
 		gridPane.add(hammSlider, 0, 1);
 		gridPane.add(showStation, 0, 2);
 		gridPane.add(enterHamm2, 20, 20);
