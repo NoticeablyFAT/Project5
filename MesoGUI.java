@@ -1,9 +1,11 @@
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MesoGUI extends Application {
@@ -11,18 +13,18 @@ public class MesoGUI extends Application {
 	@Override
 	public void start(Stage mesoStage) throws Exception {
 		Scene scene = null;
-		Pane pane = null;
 		GridPane gridPane = null;
-		
-		pane = new Pane();
 		
 		gridPane = new GridPane();
 		gridPane.setHgap(20);
 		gridPane.setVgap(20);
 		
 		scene = new Scene(gridPane);
-		TextField enterHamm = new TextField();
+		Label sliderLabel = new Label("1");
 		TextField enterHamm2 = new TextField();
+		
+		Label enterHamm = new Label();
+		
 		Slider hammSlider = new Slider(1,4,1);
 		hammSlider.setMinorTickCount(0);
 		hammSlider.setMajorTickUnit(1);
@@ -30,12 +32,32 @@ public class MesoGUI extends Application {
 		hammSlider.setShowTickLabels(true);
 		hammSlider.setSnapToTicks(true);
 		
+		hammSlider.valueProperty().addListener(new ChangeListener<Number>() {
+			 
+	         @Override
+	         public void changed(ObservableValue<? extends Number> observable, //
+	               Number oldValue, Number newValue) {
+	 
+	        	 sliderLabel.setText(Integer.toString((int)hammSlider.getValue()));
+	         }
+	      });
+		
+		
+		
+		
 		enterHamm.setText("Enter Hamming Dist:");
+		enterHamm.setPrefWidth(200);
+		
+		
+		
+		
+		
 		enterHamm2.setText("Enter Hamming Dist:");
 
-		enterHamm.setEditable(false);
+		
 		//enterHamm.setPrefColumnCount(2);
 		gridPane.add(enterHamm, 0, 0);
+		gridPane.add(sliderLabel, 1, 0);
 		gridPane.add(enterHamm2, 20, 20);
 		gridPane.add(hammSlider, 0, 1);
 		
