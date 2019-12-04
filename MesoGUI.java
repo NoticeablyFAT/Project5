@@ -7,6 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -32,15 +34,13 @@ public class MesoGUI extends Application {
 		// labels and text
 		Label sliderLabel = new Label("Enter Hamming Dist: 1");
 		Label compareWith = new Label("Compare with:");
-		TextField enterHamm2 = new TextField();
+		TextField enterHamm = new TextField();
 
 		Label distance0 = new Label("Distance 0: ");
 		Label distance1 = new Label("Distance 1: ");
 		Label distance2 = new Label("Distance 2: ");
 		Label distance3 = new Label("Distance 3: ");
 		Label distance4 = new Label("Distance 4: ");
-
-		enterHamm2.setText("Enter Hamming Dist:");
 
 		// slider
 
@@ -111,6 +111,29 @@ public class MesoGUI extends Application {
 
 		calculateHD.setOnAction(event2);
 
+		// Add station button
+		Button addStation = new Button("Add Station");
+
+		EventHandler<ActionEvent> event3 = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				if (enterHamm.getText().length() == 4) {
+					if (!allStations.contains(enterHamm.getText())) {
+						allStations.add(enterHamm.getText());
+						combo.setItems(FXCollections.observableArrayList(allStations));
+					} else {
+						Alert alert1 = new Alert(AlertType.INFORMATION, "Station list already contains this value.");
+						alert1.showAndWait();
+					}
+
+				} else {
+					Alert alert2 = new Alert(AlertType.ERROR, "Please enter a four character string.");
+					alert2.showAndWait();
+				}
+
+			}
+		};
+		addStation.setOnAction(event3);
+
 		// pane setup
 		// gridPane.add(enterHamm, 0, 0);
 		gridPane.add(sliderLabel, 0, 0);
@@ -120,12 +143,13 @@ public class MesoGUI extends Application {
 		gridPane.add(compareWith, 0, 6);
 		gridPane.add(combo, 1, 6);
 		gridPane.add(calculateHD, 0, 7);
-		gridPane.add(enterHamm2, 20, 20);
 		gridPane.add(distance0, 0, 8);
 		gridPane.add(distance1, 0, 9);
 		gridPane.add(distance2, 0, 10);
 		gridPane.add(distance3, 0, 11);
 		gridPane.add(distance4, 0, 12);
+		gridPane.add(addStation, 0, 13);
+		gridPane.add(enterHamm, 1, 13);
 
 		mesoStage.setScene(scene);
 		mesoStage.setTitle("Hamming Distance");
