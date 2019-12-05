@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+/*Class is responsible for reading Mesonet.txt, 
+ * then returning a String ArrayList containing the contents.
+ */
+
 
 public class MesoFileReader {
 
@@ -14,7 +18,7 @@ public class MesoFileReader {
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(fileName)); // Initializes buffered reader to read file
-																				
+
 			line = br.readLine();
 			while (line != null) { // Reads file and adds all station ID's to strings arraylist
 
@@ -28,11 +32,9 @@ public class MesoFileReader {
 		}
 
 	}
-	
-	public ArrayList<String> getStations(){		//Returns arraylist with list of stations
+
+	public ArrayList<String> getStations() { // Returns arraylist with list of stations
 		return stations;
 	}
-	
-	
 
 }
